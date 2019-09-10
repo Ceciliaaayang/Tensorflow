@@ -1,0 +1,202 @@
+% -*- mode:LaTeX; mode:flyspell; -*-
+\documentclass{article}
+
+% Almost always
+\usepackage{enumerate}
+\usepackage{booktabs}
+\usepackage{amsmath, amsthm}
+\usepackage{graphicx}
+\usepackage[verbose,letterpaper,top=1.25in,bottom=1in,left=1.25in,right=1.25in]{geometry}
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{\baselineskip}
+
+% extra stuff for assignments
+\newcounter{totalpoints}
+\setcounter{totalpoints}{0}
+
+\newcommand{\points}[1]{{\addtocounter{totalpoints}{#1}\textbf{[#1 points]}}}
+\usepackage{environ}
+\usepackage{etoolbox}
+\makeatletter
+\NewEnviron{answer}[1]
+{\ifx\BODY\@empty
+ \vspace{#1}%
+\else
+ {\sf \BODY}%
+\fi}
+\makeatother
+
+\usepackage{totcount}
+\regtotcounter{totalpoints}
+\begin{document}
+
+{\bigskip\hrule\bigskip
+\huge
+\noindent CMPUT 366, Winter 2019\\
+Assignment \#1
+
+\large
+Due: Monday, Feb.\ 4, 2019, 2:59pm\\
+Total points: \total{totalpoints}
+
+\normalsize
+Name:\\
+Student number:\\
+Collaborators:
+
+\bigskip\hrule\bigskip
+}
+
+\pagestyle{myheadings}
+\markboth{}{CMPUT 366 --- Assignment \#1}
+
+\begin{enumerate}
+
+%------------------------------------------------------------------------------------------
+\item \textbf{(Uninformed search)}
+\begin{enumerate}
+\item \points{15} \label{q:uninformed-graph}
+Construct a graph search problem with \textbf{no more than 10 nodes} for which all of the following are true:
+\begin{enumerate}[i.]
+    \item Least-cost search returns an optimal solution.
+    \item Breadth-first search returns the highest-cost solution.
+    \item Depth-first search returns a solution whose cost is strictly less than the highest-cost solution and strictly more than the least-cost solution.
+\end{enumerate}
+Note that this means your search problem must have at least 3 goal nodes of differing costs.
+Be sure to include and formally describe each component the graph search problem.
+
+\begin{answer}{2.5in}
+% Put your answer here
+\end{answer}
+
+
+\item \points{5}
+List the paths that are removed from the frontier by a depth first search of the problem you specified in part~(\ref{q:uninformed-graph}), \textbf{in the order in which they are removed}.
+
+\begin{answer}{1in}
+% put your answer here
+\end{answer}
+
+\item \points{5}
+List the paths that are removed from the frontier by a breadth first search of the problem you specified in part~(\ref{q:uninformed-graph}), \textbf{in the order in which they are removed}.
+
+\begin{answer}{1in}
+% put your answer here
+\end{answer}
+
+\item \points{5}
+List the paths that are removed from the frontier by a least cost first search of the problem you specified in part~(\ref{q:uninformed-graph}), \textbf{in the order in which they are removed}.
+
+\begin{answer}{1in}
+% put your answer here
+\end{answer}
+
+\end{enumerate}
+
+%------------------------------------------------------------------------------------------
+\item \textbf{(Heuristic search)}
+
+A farmer needs to move a hen, a fox, and a bushel of grain from the left side of the river to the right using a raft.
+The farmer can take one item at a time (hen, fox, or bushel of grain) using the raft.
+The hen cannot be left alone with the grain, or it will eat the grain.
+The fox cannot be left alone with the hex, or it will eat the hen.
+For example, the farmer cannot move from one side $x$ of the river to the other side $y$ if it would mean leaving the fox and hen together on side $x$.
+
+The farmer can load an item onto the raft, move the raft from one side of the river to the other, or unload an item from the raft.  The farmer wants to move the items with the fewest number of trips across the river as possible, but does not care about how much time is spent loading or unloading.
+
+\begin{enumerate}
+\item \points{6} Classify this problem using the primary representational dimensions from lecture 2.
+
+\begin{answer}{.5in}
+    % put your answer here
+\end{answer}
+
+\item \points{20} \label{q:construct-rep}
+Represent this problem as a graph search problem.
+Be sure to include and formally describe each component the graph search problem.
+
+\begin{answer}{2.5in}
+    % put your answer here
+\end{answer}
+
+\item \points{5}
+What is the forward branching factor for your representation from part~(\ref{q:construct-rep})?  Justify your answer.
+
+\begin{answer}{.75in}
+    % put your answer here
+\end{answer}
+
+
+\item \points{10} \label{q:construct-h}
+Construct a non-constant admissible heuristic for this problem.
+
+\begin{answer}{1in}
+    % put your answer here
+\end{answer}
+
+
+\item \points{5}
+Argue that the heuristic from part~(\ref{q:construct-h}) is admissible.
+
+\begin{answer}{1in}
+    % put your answer here
+\end{answer}
+
+\item \points{60}
+Implement your representation from part~(\ref{q:construct-rep}) and heuristic from part~(\ref{q:construct-h}) in Python~3 by editing the \verb|River_problem| class in the provided \texttt{riverProblem.py}.
+We will run your code with the command \verb|python3 riverProblem_run.py|.
+Your code must complete within 2~minutes for full marks.\footnote{It should run in far less time than this.}
+
+Submit all of your code (including provided boilerplate files) in a single zip file.
+
+\end{enumerate}
+
+%------------------------------------------------------------------------------------------
+\item \textbf{(Local search)}
+
+\begin{enumerate}
+    \item \points{4}
+    For each of the following problems, state whether graph search or local search is a more appropriate algorithm, and justify your answer.
+    \begin{enumerate}[i.]
+        \item Solving a Rubik's cube:
+        \begin{answer}{3\baselineskip}
+            %answer here
+        \end{answer}
+
+        \item Solving a Sudoku problem:
+        \begin{answer}{3\baselineskip}
+            %answer here
+        \end{answer}
+    \end{enumerate}
+
+    \item \points{5} Is hill climbing a \textbf{complete} algorithm?  Why or why not?
+
+    \begin{answer}{1in}
+        %answer here
+    \end{answer}
+    
+    \clearpage
+    \item \points{5} Is hill climbing with random restarts a \textbf{complete} algorithm?  Why or why not?
+
+    \begin{answer}{1in}
+        %answer here
+    \end{answer}
+
+\end{enumerate}
+
+\end{enumerate}
+
+
+%------------------------------------------------------------------------------------------
+\section*{Submission}
+Each assignment consists of a \emph{problem set} file in PDF format containing the list of questions to answer, and a zipfile of \emph{support files} containing stub code, support modules, and a \LaTeX template for generating a PDF for your answers.
+
+The intention is that you should be able to unzip the support files into an empty directory, work on the problems, and then zip the directory into a new file for submission.
+
+Each assignment is to be submitted electronically via GradeScope before the due date.  The submission should consist of a PDF file containing the written answers to the problem set, and a zipfile containing all of your code.  The zipfile includes a LaTeX file that you can edit to produce a PDF of your answers if you wish.  Otherwise, you can type your answers into your favourite word processor and print to PDF, or you can write your answers (legibly!) by hand and upload a scan.
+
+
+%\bibliography{gtdt}
+%\bibliographystyle{apalike}
+\end{document}
